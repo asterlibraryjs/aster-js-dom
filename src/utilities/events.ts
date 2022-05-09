@@ -1,7 +1,9 @@
 import { Deferred } from "@aster-js/async";
 import { IDisposable } from "@aster-js/core";
 
-export function on(target: EventTarget, type: string, callback: EventListenerOrEventListenerObject | null, options?: AddEventListenerOptions | boolean): IDisposable {
+export function on<T extends Event>(target: EventTarget, type: string, callback: (evt: T) => void, options?: AddEventListenerOptions | boolean): IDisposable;
+export function on(target: EventTarget, type: string, callback: EventListenerOrEventListenerObject, options?: AddEventListenerOptions | boolean): IDisposable;
+export function on(target: EventTarget, type: string, callback: EventListenerOrEventListenerObject, options?: AddEventListenerOptions | boolean): IDisposable {
     target.addEventListener(type, callback, options);
     return IDisposable.create(() => {
         target.removeEventListener(type, callback, options);
