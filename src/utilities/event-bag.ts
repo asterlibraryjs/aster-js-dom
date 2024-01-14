@@ -1,8 +1,8 @@
-import { Disposable, IDisposable } from "@aster-js/core";
+import { DisposableHost, IDisposable } from "@aster-js/core";
 import { on } from "./events";
 
 /** Manage events for a specific target. Very usefull for component event management */
-export class EventBag extends Disposable {
+export class EventBag extends DisposableHost {
     private readonly _events: IDisposable[] = [];
 
     get size(): number { return this._events.length; }
